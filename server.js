@@ -92,6 +92,10 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.get('/uppercase', function (req, res) {
+    res.send('{ text: '+req.query.str.toUpperCase()+' }');
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
