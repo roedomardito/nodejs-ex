@@ -93,7 +93,11 @@ app.get('/pagecount', function (req, res) {
 });
 // VBVB prueba de API
 app.get('/uppercase', function (req, res) {
-    res.send('{ text: '+req.query.str.toUpperCase()+' }');
+	var strp=req.query.str;
+	ig(!strp){
+		res.send('{ text: "",error: true }');
+	}
+    res.send('{ text: "'+req.query.str.toUpperCase()+'",error: false }');
 });
 
 // error handling
