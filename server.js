@@ -91,7 +91,7 @@ app.get('/pagecount', function (req, res) {
     res.send('{ pageCount: -1 }');
   }
 });
-
+// VBVB prueba de API
 app.get('/uppercase', function (req, res) {
     res.send('{ text: '+req.query.str.toUpperCase()+' }');
 });
