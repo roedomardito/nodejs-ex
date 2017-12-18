@@ -65,6 +65,9 @@ var initDb = function(callback) {
   });
 };
 
+
+app.use('/graph3d', express.static('graph3d'));
+
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
@@ -85,6 +88,8 @@ app.get('/', function (req, res) {
     res.render('index.html', { pageCountMessage : null});
   }
 });
+
+
 
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
