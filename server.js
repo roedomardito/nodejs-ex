@@ -116,7 +116,7 @@ app.get('/mongo', function (req, res) {
 	}
 	if (db) {
 		var col = db.collection('sampledb');
-		col.findOne({},function(e,r){
+		col.find({},function(e,r){
 			res.send(r);
 		});
 	}
