@@ -100,6 +100,19 @@ app.get('/uppercase', function (req, res) {
     res.send('{ text: "'+req.query.str.toUpperCase()+'",error: false }');
 });
 
+// VBVB prueba de API con mongodb
+app.get('/mongo', function (req, res) {
+	if (!db) {
+		initDb(function(err){});
+	}
+	if (db) {
+		var col = db.collection('counts');
+		col.findOne({},function(e,r){
+			res.send(r);
+		});
+	}
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
