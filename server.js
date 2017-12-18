@@ -20,6 +20,15 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
       mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
       mongoPassword = process.env[mongoServiceName + '_PASSWORD']
       mongoUser = process.env[mongoServiceName + '_USER'];
+console.log("DATABASE INFO");
+console.log("-------------------------------------------------");
+console.log("process.env.DATABASE_SERVICE_NAME : "+process.env.DATABASE_SERVICE_NAME);
+console.log("mongoHost : "+mongoHost);
+console.log("mongoPort : "+mongoPort);
+console.log("mongoDatabase : "+mongoDatabase);
+console.log("mongoPassword : "+mongoPassword);
+console.log("mongoUser : "+mongoUser);
+
 
   if (mongoHost && mongoPort && mongoDatabase) {
     mongoURLLabel = mongoURL = 'mongodb://';
@@ -63,7 +72,7 @@ app.get('/', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    var col = db.collection('counts');
+    var col = db.collection('sampledb');
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
@@ -84,7 +93,7 @@ app.get('/pagecount', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('counts').count(function(err, count ){
+    db.collection('sampledb').count(function(err, count ){
       res.send('{ pageCount: ' + count + '}');
     });
   } else {
@@ -106,7 +115,7 @@ app.get('/mongo', function (req, res) {
 		initDb(function(err){});
 	}
 	if (db) {
-		var col = db.collection('counts');
+		var col = db.collection('sampledb');
 		col.findOne({},function(e,r){
 			res.send(r);
 		});
