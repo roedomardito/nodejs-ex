@@ -127,6 +127,23 @@ app.get('/mongo', function (req, res) {
 	}
 });
 
+// VBVB prueba de API con mongodb
+app.get('/setip', function (req, res) {
+	if (!db) {
+		initDb(function(err){});
+	}
+	if (db) {
+		var col = db.collection('sampledb');
+		var ipaddr=req.connection.remoteAddress
+		var label=req.query.lbl
+		var timestamp=(new Date()).getTime()
+		var dta={'timestamp':timestamp,'ip':ipaddr,'label':label}
+		console.log("Insert: "+dta)
+		col.insert(dta)
+		res.send(dta) 
+	}
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
