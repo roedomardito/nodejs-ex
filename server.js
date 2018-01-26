@@ -121,8 +121,27 @@ app.get('/mongo', function (req, res) {
 	}
 	if (db) {
 		var col = db.collection('sampledb');
-		col.findOne({},function(e,r){
-			res.send(r);
+		col.find({},function(e,r){
+			a.toArray(function(e,r){
+				res.send(arr);
+			});			
+		});
+	}
+});
+
+// VBVB prueba de API con mongodb
+app.get('/listall', function (req, res) {
+	if (!db) {
+		initDb(function(err){});
+	}
+	if (db) {
+		var col = db.collection('sampledb');
+		col.find({},function(e,r){
+			var arr=[]
+			r.forEach(function(item){
+				arr.push(item)
+			})
+			res.send(arr);
 		});
 	}
 });
